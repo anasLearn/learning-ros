@@ -1,6 +1,29 @@
 # ROS
 
 This document explains some commands about ROS.
+A ROS program consists of packages. Each package contains one or multiple nodes.
+
+## Create a ROS workspace
+
+Go to a folder of your choice (`~` for example) and create the catkin workspace.
+
+```bash
+mkdir -p ~/catkin_ws/src
+```
+
+Then activate the workspace by sourcing it.
+
+```bash
+cd ~/catkin_ws
+source devel/setup.bash
+```
+
+## Create a ROS package
+
+```bash
+cd ~/catkin_ws/src
+catkin_create_pkg name_of_package dependecy_1 dependency_2 dependency_etc
+```
 
 ## Starting the ROS Master
 
@@ -11,6 +34,10 @@ roscore
 ```
 
 ## Running a node
+
+> **Note**
+>
+> When creating a node with python. always make the Python file executable using `chmod +x`. Also, it is necessary to add the line `#!/usr/bin/env python3` at the beginning of the Python file.
 
 To run a node, follow these steps:
 
@@ -25,12 +52,16 @@ Nodes can also be run using Python or C++. For Python nodes:
 
 ```bash
 python3 path_to_python_file_directory/python_file_of_node
+# or
+cd path_to_python_file_directory
+./python_file_of_node  # Like an executable file
 ```
 
 For C++ nodes:
 
 ```bash
-cd catkin_ws/devel/lib/pkg_name/node_name
+cd catkin_ws/devel/lib/pkg_name
+./node_name
 ```
 
 The node name is defined in the file `catkin_ws/src/pkg_name/CMakeLists.txt`.
@@ -141,3 +172,69 @@ rosservice info /service_name
 
 You get the node that started the service.
 You also get the URI of the service. As well as its type and arguments.
+
+## Custom Message Definitons
+
+It is better to create the defintion of custom messages in separate packages. Here is an example to do so:
+
+```bash
+cd ~/catkin_ws/src
+catkin_create_pkg my_robot_msgs roscpp rospy std_msgs
+```
+
+The definition of the messages is in the folder `msg` of the created package. Give each file the extension `.msg`.
+
+Also, you need to modify Package.xml and CMakeListsts.txt for the messages to work properly.
+
+When you run:
+
+```bash
+cd ~/catkin_ws
+catkin_make
+```
+
+ROS generate a header `.h` file in the folder `catkin_ws/devel/include/message_pkg_name`.
+
+To be able to use this message package, you must source the catkin workspace again.
+
+## Show Message Definition
+
+To show the definition of a message, whether it is standard or custom, run this command:
+
+```bash
+rosmsg show message_name
+```
+
+To see a list of all the messages, run:
+
+```bash
+rosmsg list
+```
+
+## Show service defintions
+
+**Note:** There is a difference between a service and a service definition:
+
+> A service: is what a server is providing, it can be like this `/compute_disk_area`
+
+and
+
+> A service defintion: is the defintion of the content of the message that server and client send and receive. Example:
+>
+> ```C
+> float64 radius
+> ---
+> float64 area 
+> ```
+
+To list all service definitions (standard and custom):
+
+```bash
+rossrv list
+```
+
+To show a particular service definition:
+
+```bash
+rossrv show service_defintion_name
+```
