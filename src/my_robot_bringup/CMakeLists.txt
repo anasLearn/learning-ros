@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(my_robot_tutorials)
+project(my_robot_bringup)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -7,14 +7,7 @@ project(my_robot_tutorials)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  std_srvs
-  rospy_tutorials
-  my_robot_msgs
-)
+find_package(catkin REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -73,7 +66,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -107,8 +100,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES my_robot_tutorials
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  LIBRARIES my_robot_bringup
+#  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
 
@@ -120,12 +113,12 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
+# ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/my_robot_tutorials.cpp
+#   src/${PROJECT_NAME}/my_robot_bringup.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -136,43 +129,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/my_robot_tutorials_node.cpp)
-
-add_executable(node_cpp src/my_first_node.cpp)
-target_link_libraries(node_cpp ${catkin_LIBRARIES})
-
-add_executable(robot_news_radio_transmitter src/robot_news_radio_transmitter.cpp)
-target_link_libraries(robot_news_radio_transmitter ${catkin_LIBRARIES})
-
-add_executable(smartphone src/smartphone.cpp)
-target_link_libraries(smartphone ${catkin_LIBRARIES})
-
-add_executable(number_publisher src/number_publisher.cpp)
-target_link_libraries(number_publisher ${catkin_LIBRARIES})
-
-add_executable(number_counter src/number_counter.cpp)
-target_link_libraries(number_counter ${catkin_LIBRARIES})
-
-add_executable(add_two_ints_server src/add_two_ints_server.cpp)
-target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
-
-add_executable(add_two_ints_client src/add_two_ints_client.cpp)
-target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
-
-add_executable(compute_disk_area_server src/compute_disk_area_server.cpp)
-target_link_libraries(compute_disk_area_server ${catkin_LIBRARIES})
-
-add_executable(compute_disk_area_client src/compute_disk_area_client.cpp)
-target_link_libraries(compute_disk_area_client ${catkin_LIBRARIES})
-
-add_executable(led_panel_node src/led_panel_node.cpp)
-target_link_libraries(led_panel_node ${catkin_LIBRARIES})
-
-add_executable(battery_node src/battery_node.cpp)
-target_link_libraries(battery_node ${catkin_LIBRARIES})
-
-add_executable(number_counter_oop src/number_counter_oop.cpp)
-target_link_libraries(number_counter_oop ${catkin_LIBRARIES})
+# add_executable(${PROJECT_NAME}_node src/my_robot_bringup_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -236,7 +193,7 @@ target_link_libraries(number_counter_oop ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_my_robot_tutorials.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_my_robot_bringup.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

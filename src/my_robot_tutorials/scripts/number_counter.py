@@ -31,8 +31,7 @@ if __name__ == "__main__":
     # instances of this node
     rospy.init_node("number_counter", anonymous=True)
 
-    
-    sub = sub = rospy.Subscriber("/number", Int64, callback_receive_number)
+    sub = rospy.Subscriber("/number", Int64, callback_receive_number)
     pub = rospy.Publisher("/number_count", Int64, queue_size=10)
 
     service = rospy.Service(
@@ -44,5 +43,3 @@ if __name__ == "__main__":
 
     # Keep the script here without going further
     rospy.spin()
-
-    

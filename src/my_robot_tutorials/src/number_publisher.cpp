@@ -18,6 +18,13 @@ int main(int argc, char **argv)
 
     ROS_INFO("Publishing numbers from a node written with C++");
 
+    // Get the frequency form ROS params
+    double publish_frequency;
+    // Get the ROS param and pack it in the variable publish_frequency
+    nh.getParam("/number_publish_frequency", publish_frequency);
+
+    nh.setParam("/a_param_from_cpp", "ztx");
+    
     ros::Rate rate(3);
 
     while(ros::ok()) {

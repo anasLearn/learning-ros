@@ -11,7 +11,10 @@ if __name__ == "__main__":
 
     pub = rospy.Publisher("/number", Int64, queue_size=10)
 
-    rate = rospy.Rate(2)
+    publish_frequency = rospy.get_param("/number_publish_frequency")
+    rate = rospy.Rate(publish_frequency)
+
+    rospy.set_param("/another_param_from_python", 3)
 
     while not rospy.is_shutdown():
         msg = Int64()

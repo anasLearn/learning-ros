@@ -53,4 +53,3 @@ int main(int argc, char **argv)
     // Keep the node running until we send a shutdown signal to it
     ros::spin();
 }
-
