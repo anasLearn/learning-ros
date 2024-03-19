@@ -17,7 +17,7 @@ echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 
-sudo apt install python3-catkin-tools 
+sudo apt-get install python3-catkin-tools -y 
 # sudo apt-get install python3-osrf-pycommon
 
 
@@ -25,12 +25,13 @@ sudo apt install python3-catkin-tools
 # sudo apt-get install python3-rosdep
 
 
-sudo apt-get install python3-rosdep
+sudo apt-get install python3-rosdep  -y  
 
 sudo rosdep init
 
 rosdep update
 
 
-sudo apt install ros-noetic-moveit
+sudo apt-get install ros-noetic-moveit  -y
+
 
